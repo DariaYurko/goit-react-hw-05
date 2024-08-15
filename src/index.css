@@ -19,15 +19,15 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: aquamarine;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #242424e3;
+  color: #fafafa;
 }
 
 h1 {
@@ -60,7 +60,7 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: aquamarine;
   }
   button {
     background-color: #f9f9f9;
