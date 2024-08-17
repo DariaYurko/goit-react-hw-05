@@ -1,9 +1,11 @@
 .list {
    display: flex;
-   gap: 10px;
+   gap: 20px;
 }
+
 .link {
-   color: #fafafa;
+   font-size: 22px;
+   list-style-type: none;
    transition: all 250ms;
 }
 

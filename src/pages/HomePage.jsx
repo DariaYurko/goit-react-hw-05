@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchTrandingMoviesData } from '../services/movies-api';
 import MovieList from '../components/MovieList/MovieList';
-import MovieDetailsPage from './MovieDetailsPage';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -22,8 +21,8 @@ const HomePage = () => {
   console.log(movies);
 
   return (
-    <section className="homePage">
-      <MovieList movies={movies} />
+     <section className="homePage">
+       <MovieList movies={movies} />
     </section>
   );
 };

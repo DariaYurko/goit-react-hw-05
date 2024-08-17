@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 
 const MovieList = ({ movies }) => {
+
    return (
       <ul>
          {movies.map((movie) => {
             return (
               <li key={movie.id}>
-                <Link to="/movies/:movieId">{movie.title}</Link>
+                <Link to={`/movies/${movie.id}`}>
+                  {movie.title}
+                </Link>
               </li>
             );
          })}
