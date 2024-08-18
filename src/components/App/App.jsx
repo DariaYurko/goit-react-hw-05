@@ -69,13 +69,23 @@ function App() {
               <Route
                 path="cast"
                 element={
-                  <MovieCast loading={loading} setLoading={setLoading} />
+                  <MovieCast
+                    loading={loading}
+                    setLoading={setLoading}
+                    error={error}
+                    setError={setError}
+                  />
                 }
               />
               <Route
                 path="reviews"
                 element={
-                  <MovieReviews loading={loading} setLoading={setLoading} />
+                  <MovieReviews
+                    loading={loading}
+                    setLoading={setLoading}
+                    error={error}
+                    setError={setError}
+                  />
                 }
               />
             </Route>

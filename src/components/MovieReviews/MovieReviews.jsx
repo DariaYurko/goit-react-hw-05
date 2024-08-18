@@ -3,18 +3,22 @@ import { useParams } from 'react-router-dom';
 import { fetchReviewsMovie } from '../../services/movies-api';
 import Loader from '../Loader/Loader';
 
-const MovieReviews = ({ loading, setLoading }) => {
-  const [reviews, setReviews] = useState([]);
-  const {movieId} = useParams();
+const MovieReviews = ({ loading, setLoading, setError }) => {
+  const [reviews, setReviews] = useState(null);
+  const { movieId } = useParams();
 
   useEffect(() => {
+    setError(false);
     const getReviewsInfo = async () => {
       try {
         setLoading(true);
         const { data } = await fetchReviewsMovie(movieId);
         setReviews(data.results);
+
       } catch (err) {
         console.log(err.message);
+        setError(err.message);
+
       } finally {
         setLoading(false);
       }
@@ -22,14 +26,16 @@ const MovieReviews = ({ loading, setLoading }) => {
     getReviewsInfo();
   }, [movieId]);
 
-  // console.log(reviews);
-
+  
   return (
     <div>
       {loading && <Loader />}
-      {reviews.length === 0 ? (
+
+      {Array.isArray(reviews) && reviews.length === 0 && (
         <p>We dont have any information about reviews</p>
-      ) : (
+      )}
+
+      {Array.isArray(reviews) && (
         <ul>
           {reviews.map(review => {
             return (

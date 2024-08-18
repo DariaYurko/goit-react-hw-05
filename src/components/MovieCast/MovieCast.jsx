@@ -4,37 +4,44 @@ import { fetchCastMovie } from '../../services/movies-api';
 import css from './MovieCast.module.css';
 import Loader from '../Loader/Loader';
 
-const MovieCast = ({ loading, setLoading }) => {
-  const [cast, setCast] = useState([]);
+const MovieCast = ({ loading, setLoading, error, setError }) => {
+  const [cast, setCast] = useState(null);
   const { movieId } = useParams(); // movieId
 
   // console.log('params from  Cast', params);
 
   useEffect(() => {
+    setError(false);
+
     const getCastInfo = async () => {
       try {
         setLoading(true);
         const { data } = await fetchCastMovie(movieId);
         setCast(data.cast);
       } catch (err) {
-         console.log(err.message);
-         
+        console.log(err);
+        setError(err.message);
+
       } finally {
         setLoading(false);
       }
     };
 
     getCastInfo();
-  }, []);
+  }, [movieId]);
 
   //   console.log(cast);
 
   return (
     <>
-      {loading && <Loader />}
-      {cast.length === 0 ? (
+  
+      {Array.isArray(cast) && cast.length === 0 && (
         <p>We dont have any information</p>
-      ) : (
+      )}
+
+      {loading && <Loader />}
+
+      {Array.isArray(cast) && (
         <ul className={css.actorList}>
           {cast.map(actor => {
             return (
