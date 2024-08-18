@@ -1,12 +1,13 @@
 import css from './SearchForm.module.css';
 
 const SearchForm = ({ onSearch }) => {
+  
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
-    const queryMovie = form.elements.query.value.trim();
-    onSearch(queryMovie);
-    // form.reset();
+    const queryValue = form.elements.query.value.trim();
+    onSearch(queryValue);
+    form.reset();
   };
 
   return (

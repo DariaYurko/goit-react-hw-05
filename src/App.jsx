@@ -7,6 +7,7 @@ import './App.css';
 import MovieCast from './components/MovieCast/MovieCast';
 import Navigation from './components/Navigation/Navigation';
 import MovieReviews from './components/MovieReviews/MovieReviews';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import Loader from './components/Loader/Loader';
 // --------------------/
 
@@ -17,6 +18,8 @@ const MovieDetailsPage = lazy(() => import('./pages/MovieDetailsPage'));
 // --------------------/
 
 function App() {
+  const [loading, setLoading] = useState(false);
+
   return (
     <>
       <header>
@@ -26,12 +29,34 @@ function App() {
       <main>
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/movies" element={<MoviesPage />} />
-            <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-              <Route path="cast" element={<MovieCast />} />
-              <Route path="reviews" element={<MovieReviews />} />
+            <Route
+              path="/"
+              element={<HomePage loading={loading} setLoading={setLoading} />}
+            />
+            <Route
+              path="/movies"
+              element={<MoviesPage loading={loading} setLoading={setLoading} />}
+            />
+            <Route
+              path="/movies/:movieId"
+              element={
+                <MovieDetailsPage loading={loading} setLoading={setLoading} />
+              }
+            >
+              <Route
+                path="cast"
+                element={
+                  <MovieCast loading={loading} setLoading={setLoading} />
+                }
+              />
+              <Route
+                path="reviews"
+                element={
+                  <MovieReviews loading={loading} setLoading={setLoading} />
+                }
+              />
             </Route>
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </main>
