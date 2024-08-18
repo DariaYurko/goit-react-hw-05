@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { fetchDetailsMovieData } from '../services/movies-api';
-import { Link, useParams, Outlet, useLocation } from 'react-router-dom';
-import Loader from '../components/Loader/Loader';
+import { fetchDetailsMovieData } from '../../services/movies-api';
+import { Link, useParams, Outlet, useLocation, NavLink } from 'react-router-dom';
+import Loader from '../../components/Loader/Loader';
+import css from './MovieDetailsPage.module.css'
 
 const MovieDetailsPage = ({ loading, setLoading }) => {
   const [movieInfo, setMovieInfo] = useState([]);
   const [genres, setGenres] = useState([]);
 
-  const params = useParams();     // movieId
+  const params = useParams(); // movieId
   const movieId = params.movieId;
 
   const location = useLocation();
@@ -35,14 +36,18 @@ const MovieDetailsPage = ({ loading, setLoading }) => {
 
   return (
     <section className="details">
-      <Link to={backLinkRef.current}>Go back</Link>
+      <Link to={backLinkRef.current} className={css.backLink}>
+        go back
+      </Link>
+
       {loading && <Loader />}
-      <div className="content">
-        <div className="mainBlok">
+
+      <div className={css.content}>
+        <div className={css.mainBlock}>
           <div className="tumbPoster">
             <img
               src={`https://image.tmdb.org/t/p/w400/${movieInfo.poster_path}`}
-              alt="qwqw"
+              alt={`Poster by ${movieInfo.title}`}
               className="poster"
             />
           </div>
@@ -64,17 +69,21 @@ const MovieDetailsPage = ({ loading, setLoading }) => {
 
         <div className="additionalBlok">
           <h3>Additional information</h3>
-          <ul>
+          <ul className={css.additionalList}>
             <li>
-              <Link to="cast">Cast</Link>
+              <NavLink to="cast" className={css.additionalLink}>
+                Cast
+              </NavLink>
             </li>
             <li>
-              <Link to="reviews">Reviews</Link>
+              <NavLink to="reviews" className={css.additionalLink}>
+                Reviews
+              </NavLink>
             </li>
-            <div>
-              <Outlet />
-            </div>
           </ul>
+          <div>
+            <Outlet />
+          </div>
         </div>
       </div>
     </section>

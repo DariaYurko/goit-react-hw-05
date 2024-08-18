@@ -1,28 +1,30 @@
 import { Suspense, lazy, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import './App.css';
+import css from './App.module.css';
 
 // --------- Components
-import MovieCast from './components/MovieCast/MovieCast';
-import Navigation from './components/Navigation/Navigation';
-import MovieReviews from './components/MovieReviews/MovieReviews';
-import NotFoundPage from './components/NotFoundPage/NotFoundPage';
-import Loader from './components/Loader/Loader';
+import MovieCast from '../MovieCast/MovieCast';
+import Navigation from '../Navigation/Navigation';
+import MovieReviews from '../MovieReviews/MovieReviews';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import Loader from '../Loader/Loader';
+
 // --------------------/
 
 // --------------- Pages
-const HomePage = lazy(() => import('./pages/HomePage'));
-const MoviesPage = lazy(() => import('./pages/MoviesPage'));
-const MovieDetailsPage = lazy(() => import('./pages/MovieDetailsPage'));
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage.jsx'));
+const MoviesPage = lazy(() => import('../../pages/MoviesPage/MoviesPage.jsx'));
+const MovieDetailsPage = lazy(() => import('../../pages/MovieDetailsPage/MovieDetailsPage')
+);
 // --------------------/
 
 function App() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <>
-      <header>
+    <div className={css.wrapper}>
+      <header className={css.header}>
         <Navigation />
       </header>
 
@@ -56,13 +58,15 @@ function App() {
                 }
               />
             </Route>
+
             <Route path="*" element={<NotFoundPage />} />
+            
           </Routes>
         </Suspense>
       </main>
 
       <footer></footer>
-    </>
+    </div>
   );
 }
 
