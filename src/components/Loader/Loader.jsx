@@ -1,4 +1,4 @@
-import {ThreeDots} from 'react-loader-spinner'
+import { ThreeDots } from 'react-loader-spinner';
 
 const Loader = () => {
   return (
@@ -9,7 +9,11 @@ const Loader = () => {
       color="rgb(28, 252, 181)"
       radius="9"
       ariaLabel="three-dots-loading"
-      wrapperStyle={{}}
+      wrapperStyle={{
+        position: 'absolute',
+        left: '50%',
+        transform: 'translateX(-50%)',
+      }}
       wrapperClass=""
     />
   );

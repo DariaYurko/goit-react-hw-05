@@ -4,12 +4,11 @@ import { fetchTrandingMoviesData } from '../../services/movies-api';
 import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 
-const HomePage = ({ loading, setLoading }) => {
+const HomePage = ({ loading, setLoading, error, setError }) => {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(false);
-
+  
   useEffect(() => {
-    // if (movies.length === 0) return;
+    setError(false);
 
     const fetchMovies = async () => {
       try {
@@ -23,12 +22,13 @@ const HomePage = ({ loading, setLoading }) => {
       }
     };
     fetchMovies();
-  }, [setLoading]);
+  }, [setLoading, setError]);
 
   // console.log(movies);
 
   return (
     <section className="homePage">
+      <h1>TOP the most popular movies today</h1>
       {loading && <Loader />}
       {error ? <p>{error}</p> : <MovieList movies={movies} />}
     </section>

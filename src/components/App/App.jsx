@@ -15,12 +15,14 @@ import Loader from '../Loader/Loader';
 // --------------- Pages
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage.jsx'));
 const MoviesPage = lazy(() => import('../../pages/MoviesPage/MoviesPage.jsx'));
-const MovieDetailsPage = lazy(() => import('../../pages/MovieDetailsPage/MovieDetailsPage')
+const MovieDetailsPage = lazy(() =>
+  import('../../pages/MovieDetailsPage/MovieDetailsPage')
 );
 // --------------------/
 
 function App() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   return (
     <div className={css.wrapper}>
@@ -33,16 +35,35 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<HomePage loading={loading} setLoading={setLoading} />}
+              element={
+                <HomePage
+                  loading={loading}
+                  setLoading={setLoading}
+                  error={error}
+                  setError={setError}
+                />
+              }
             />
             <Route
               path="/movies"
-              element={<MoviesPage loading={loading} setLoading={setLoading} />}
+              element={
+                <MoviesPage
+                  loading={loading}
+                  setLoading={setLoading}
+                  error={error}
+                  setError={setError}
+                />
+              }
             />
             <Route
               path="/movies/:movieId"
               element={
-                <MovieDetailsPage loading={loading} setLoading={setLoading} />
+                <MovieDetailsPage
+                  loading={loading}
+                  setLoading={setLoading}
+                  error={error}
+                  setError={setError}
+                />
               }
             >
               <Route
@@ -60,7 +81,6 @@ function App() {
             </Route>
 
             <Route path="*" element={<NotFoundPage />} />
-            
           </Routes>
         </Suspense>
       </main>
