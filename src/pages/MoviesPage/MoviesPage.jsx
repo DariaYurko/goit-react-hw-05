@@ -13,30 +13,29 @@ import {
 } from '../../services/messages';
 // ----------------------------------------------------------/
 
-const HomePage = ({ loading, setLoading, error, setError }) => {
-  const [movies, setMovies] = useState([]);
+const MoviesPage = ({ loading, setLoading, error, setError }) => {
+  const [movies, setMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
-  
+
   // --------------------------------------------------------/
   useEffect(() => {
     setError(false);
-    
+
     if (!query) return;
 
     const fetchMovie = async () => {
       try {
         setLoading(true);
         const data = await fetchMovieBySearch(query);
+
         setMovies(data.data.results);
-        // console.log(data.data.results);
 
         if (data.data.results.length === 0) {
           sendNoteBadRequest();
         }
 
-
-      } catch(err) {
+      } catch (err) {
         setError(err.message);
         console.log(error);
 
@@ -49,13 +48,12 @@ const HomePage = ({ loading, setLoading, error, setError }) => {
   }, [query]);
   // --------------------------------------------------------/
 
-
-
   const onSearch = queryValue => {
     setSearchParams({
       query: queryValue,
     });
 
+    console.log('query', query);
     //------------------------------------------------------/
     if (queryValue === '') {
       sendNoteEmptyField();
@@ -63,18 +61,22 @@ const HomePage = ({ loading, setLoading, error, setError }) => {
     //------------------------------------------------------/
   };
 
-
-
   return (
     <section className="moviePage">
+      
       <SearchForm onSearch={onSearch} />
-
-      {error ? <p>{error}</p> : <MovieList movies={movies} />}
-  
       {loading && <Loader />}
+
+      {error && <p>{error}</p>}
+
+      {Array.isArray(movies) && movies.length > 0 && (
+        <MovieList movies={movies} />
+      )}
+
+
       <Toaster />
     </section>
   );
 };
 
-export default HomePage;
+export default MoviesPage;

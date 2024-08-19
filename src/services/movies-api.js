@@ -80,12 +80,13 @@ export const fetchMovieBySearch = async query => {
       api_key: '5d57d5819735998446aa04a8899b955e',
       include_adult: 'false',
       language: 'en-US',
+      page: '1',
       query,
     },
   };
 
   const response = await axios.get(
-    `https://api.themoviedb.org/3/search/movie?&page=1`,
+    `https://api.themoviedb.org/3/search/movie`,
     options
   );
 

@@ -10,9 +10,7 @@ const Loader = () => {
       radius="9"
       ariaLabel="three-dots-loading"
       wrapperStyle={{
-        position: 'absolute',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        // transform: 'translateX(-50%)',
       }}
       wrapperClass=""
     />

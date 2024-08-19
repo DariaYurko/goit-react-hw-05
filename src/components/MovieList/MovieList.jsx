@@ -32,10 +32,11 @@ const MovieList = ({ movies }) => {
                   />
                 </div>
               )}
-
-              <h3>
-                {movie.title} ({movie.release_date.slice(0, 4)})
-              </h3>
+              <div className={css.cardInfo}>
+                <h3 className={css.cardTitle}>
+                  {movie.title} ({movie.release_date.slice(0, 4)})
+                </h3>
+              </div>
             </Link>
           </li>
         );

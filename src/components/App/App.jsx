@@ -20,56 +20,26 @@ const MovieDetailsPage = lazy(() =>
 );
 // --------------------/
 
-function App() {
+const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   return (
-    <div className={css.wrapper}>
+    <>
       <header className={css.header}>
-        <Navigation />
+        <div className={css.container}>
+          <Navigation />
+        </div>
       </header>
 
       <main>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <HomePage
-                  loading={loading}
-                  setLoading={setLoading}
-                  error={error}
-                  setError={setError}
-                />
-              }
-            />
-            <Route
-              path="/movies"
-              element={
-                <MoviesPage
-                  loading={loading}
-                  setLoading={setLoading}
-                  error={error}
-                  setError={setError}
-                />
-              }
-            />
-            <Route
-              path="/movies/:movieId"
-              element={
-                <MovieDetailsPage
-                  loading={loading}
-                  setLoading={setLoading}
-                  error={error}
-                  setError={setError}
-                />
-              }
-            >
+        <div className={css.container}>
+          <Suspense fallback={<Loader />}>
+            <Routes>
               <Route
-                path="cast"
+                path="/"
                 element={
-                  <MovieCast
+                  <HomePage
                     loading={loading}
                     setLoading={setLoading}
                     error={error}
@@ -78,9 +48,9 @@ function App() {
                 }
               />
               <Route
-                path="reviews"
+                path="/movies"
                 element={
-                  <MovieReviews
+                  <MoviesPage
                     loading={loading}
                     setLoading={setLoading}
                     error={error}
@@ -88,15 +58,49 @@ function App() {
                   />
                 }
               />
-            </Route>
+              <Route
+                path="/movies/:movieId"
+                element={
+                  <MovieDetailsPage
+                    loading={loading}
+                    setLoading={setLoading}
+                    error={error}
+                    setError={setError}
+                  />
+                }
+              >
+                <Route
+                  path="cast"
+                  element={
+                    <MovieCast
+                      loading={loading}
+                      setLoading={setLoading}
+                      error={error}
+                      setError={setError}
+                    />
+                  }
+                />
+                <Route
+                  path="reviews"
+                  element={
+                    <MovieReviews
+                      loading={loading}
+                      setLoading={setLoading}
+                      error={error}
+                      setError={setError}
+                    />
+                  }
+                />
+              </Route>
 
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </div>
       </main>
 
       <footer></footer>
-    </div>
+    </>
   );
 }
 

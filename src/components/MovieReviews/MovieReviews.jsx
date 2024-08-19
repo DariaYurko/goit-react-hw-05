@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchReviewsMovie } from '../../services/movies-api';
 import Loader from '../Loader/Loader';
+import css from './MovieReviews.module.css'
 
 const MovieReviews = ({ loading, setLoading, setError }) => {
   const [reviews, setReviews] = useState(null);
@@ -36,12 +37,12 @@ const MovieReviews = ({ loading, setLoading, setError }) => {
       )}
 
       {Array.isArray(reviews) && (
-        <ul>
+        <ul className={css.list}>
           {reviews.map(review => {
             return (
-              <li key={review.id}>
-                <h3>{review.author}</h3>
-                <p>{review.content}</p>
+              <li key={review.id} className={css.item}>
+                <h3 className={css.title}>{review.author}</h3>
+                <p className={css.text}>{review.content}</p>
               </li>
             );
           })}

@@ -23,8 +23,8 @@ const MovieDetailsPage = ({ loading, setLoading, error, setError }) => {
 
   useEffect(() => {
     setLoading(true);
-    setError(false)
-    
+    setError(false);
+
     const fetchMovieDetails = async () => {
       try {
         const data = await fetchDetailsMovieData(movieId);
@@ -56,31 +56,38 @@ const MovieDetailsPage = ({ loading, setLoading, error, setError }) => {
       ) : (
         <div className={css.content}>
           <div className={css.mainBlock}>
-            <div className="tumbPoster">
+            <div className={css.tumbPoster}>
               <img
                 src={`https://image.tmdb.org/t/p/w400/${movieInfo.poster_path}`}
                 alt={`Poster by ${movieInfo.title}`}
-                className="poster"
+                className={css.poster}
               />
             </div>
-            <div>
-              <h2>
+            <div className={css.content}>
+              <h2 className={css.contentTitle}>
                 {movieInfo.title}&nbsp; ({movieInfo.release_date})
               </h2>
-              <p>User Score: {movieInfo.vote_average}</p>
-              <h3>Overview</h3>
-              <p>{movieInfo.overview}</p>
-              <h3>Genres</h3>
-              <ul>
-                {genres.map(genre => {
-                  return <li key={genre.id}>{genre.name}</li>;
-                })}
-              </ul>
+              <div className={css.category}>
+                <h3 className={css.contentSubtitle}>User Score:</h3>
+                <p>{movieInfo.vote_average}</p>
+              </div>
+              <div className={css.category}>
+                <h3 className={css.contentSubtitle}>Overview</h3>
+                <p>{movieInfo.overview}</p>
+              </div>
+              <div className={css.category}>
+                <h3 className={css.contentSubtitle}>Genres</h3>
+                <ul>
+                  {genres.map(genre => {
+                    return <li key={genre.id}>{genre.name}</li>;
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="additionalBlok">
-            <h3>Additional information</h3>
+          <div className={css.additionalBlock}>
+            <h3 className={css.additionalTitle}>Additional information</h3>
             <ul className={css.additionalList}>
               <li>
                 <NavLink to="cast" className={css.additionalLink}>

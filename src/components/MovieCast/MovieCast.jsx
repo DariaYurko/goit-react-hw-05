@@ -39,7 +39,7 @@ const MovieCast = ({ loading, setLoading, error, setError }) => {
         <p>We dont have any information</p>
       )}
 
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
 
       {Array.isArray(cast) && (
         <ul className={css.actorList}>
