@@ -65,7 +65,7 @@ const MoviesPage = ({ loading, setLoading, error, setError }) => {
     <section className="moviePage">
       
       <SearchForm onSearch={onSearch} />
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
 
       {error && <p>{error}</p>}
 

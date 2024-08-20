@@ -30,9 +30,11 @@ const HomePage = ({ loading, setLoading, error, setError }) => {
 
   return (
     <section className="homePage">
-      <h1 className={css.title}>TOP the most popular movies today</h1>
-
-      {loading && <Loader />}
+      {loading ? (
+        <Loader />
+      ) : (
+        <h1 className={css.title}>TOP the most popular movies today</h1>
+      )}
 
       {error && <p>{error}</p>}
 

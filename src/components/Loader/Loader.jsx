@@ -4,13 +4,15 @@ const Loader = () => {
   return (
     <ThreeDots
       visible={true}
-      height="80"
+      height="70"
       width="80"
       color="rgb(28, 252, 181)"
       radius="9"
       ariaLabel="three-dots-loading"
       wrapperStyle={{
-        // transform: 'translateX(-50%)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
       wrapperClass=""
     />

@@ -48,7 +48,7 @@ const MovieDetailsPage = ({ loading, setLoading, error, setError }) => {
         Go back
       </Link>
 
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
 
       {error ? (
         <p>{error}</p>
