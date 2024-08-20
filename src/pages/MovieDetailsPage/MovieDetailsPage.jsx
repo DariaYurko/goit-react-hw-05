@@ -32,7 +32,6 @@ const MovieDetailsPage = ({ loading, setLoading, error, setError }) => {
         setGenres(data.data.genres);
       } catch (err) {
         setError(err.message);
-        console.log(err.message);
       } finally {
         setLoading(false);
       }
@@ -46,7 +45,7 @@ const MovieDetailsPage = ({ loading, setLoading, error, setError }) => {
   return (
     <section className="details">
       <Link to={backLinkRef.current} className={css.backLink}>
-        go back
+        Go back
       </Link>
 
       {loading && <Loader />}
@@ -56,13 +55,24 @@ const MovieDetailsPage = ({ loading, setLoading, error, setError }) => {
       ) : (
         <div className={css.content}>
           <div className={css.mainBlock}>
-            <div className={css.tumbPoster}>
-              <img
-                src={`https://image.tmdb.org/t/p/w400/${movieInfo.poster_path}`}
-                alt={`Poster by ${movieInfo.title}`}
-                className={css.poster}
-              />
-            </div>
+            {movieInfo.poster_path ? (
+              <div className={css.tumbPoster}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w400/${movieInfo.poster_path}`}
+                  alt={`Poster by ${movieInfo.title}`}
+                  className={css.poster}
+                />
+              </div>
+            ) : (
+              <div className={css.tumbPoster}>
+                <img
+                  src={`https://dummyimage.com/400x600/cdcdcd/000.jpg&amp;text=No+poster`}
+                  alt={`Poster by ${movieInfo.title}`}
+                  className={css.poster}
+                />
+              </div>
+            )}
+
             <div className={css.content}>
               <h2 className={css.contentTitle}>
                 {movieInfo.title}&nbsp; ({movieInfo.release_date})

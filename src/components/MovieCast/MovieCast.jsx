@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchCastMovie } from '../../services/movies-api';
 import css from './MovieCast.module.css';
-import Loader from '../Loader/Loader';
 
-const MovieCast = ({ loading, setLoading, error, setError }) => {
+
+const MovieCast = ({ setLoading, setError }) => {
   const [cast, setCast] = useState(null);
   const { movieId } = useParams(); // movieId
 

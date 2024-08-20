@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchReviewsMovie } from '../../services/movies-api';
-import Loader from '../Loader/Loader';
 import css from './MovieReviews.module.css'
 
-const MovieReviews = ({ loading, setLoading, setError }) => {
+const MovieReviews = ({ setLoading, setError }) => {
   const [reviews, setReviews] = useState(null);
   const { movieId } = useParams();
 
@@ -30,7 +29,6 @@ const MovieReviews = ({ loading, setLoading, setError }) => {
   
   return (
     <div>
-      {loading && <Loader />}
 
       {Array.isArray(reviews) && reviews.length === 0 && (
         <p>We dont have any information about reviews</p>
